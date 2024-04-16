@@ -49,7 +49,7 @@ export class AddContattoComponent implements OnInit {
     })
   }
 
-  calculateID(): string{
+  calcolaID(): string{
     let appoggio: number = 0 
     for (const element of this.contatti) {
       if (parseInt(element.id) > appoggio) appoggio = parseInt(element.id)
@@ -93,7 +93,7 @@ export class AddContattoComponent implements OnInit {
     };
   
     const contatto: ContattoDTO = {
-      id: this.calculateID(),
+      id: this.calcolaID(),
       tipologia: this.contatto.value.selezionaTipologia.toLowerCase(),
       nome: this.contatto.value.nome,
       cognome: this.contatto.value.cognome,
