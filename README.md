@@ -1,0 +1,2 @@
+# Rubrica
+contact list
