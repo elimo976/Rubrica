@@ -24,7 +24,7 @@ export class AddContattoComponent implements OnInit {
   ) { }
 
 
-  contatti:Contatto[] = []
+  contatti: Contatto[] = []
   ngOnInit() {
     this.contatto = this.formBuilder.group({
       selezionaTipologia: ['', Validators.required],
@@ -49,8 +49,8 @@ export class AddContattoComponent implements OnInit {
     })
   }
 
-  calcolaID(): string{
-    let appoggio: number = 0 
+  calcolaID(): string {
+    let appoggio: number = 0
     for (const element of this.contatti) {
       if (parseInt(element.id) > appoggio) appoggio = parseInt(element.id)
     }
@@ -83,7 +83,7 @@ export class AddContattoComponent implements OnInit {
     }
 
     const dataNascitaFormatted = this.formatDate(this.contatto.value.dataNascita);
-  
+
     const indirizzoDTO: IndirizzoDTO = {
       viaECivico: this.contatto.value.indirizzo[0].viaECivico,
       citta: this.contatto.value.indirizzo[0].citta,
@@ -91,7 +91,7 @@ export class AddContattoComponent implements OnInit {
       cap: this.contatto.value.indirizzo[0].cap,
       nazione: this.contatto.value.indirizzo[0].nazione
     };
-  
+
     const contatto: ContattoDTO = {
       id: this.calcolaID(),
       tipologia: this.contatto.value.selezionaTipologia.toLowerCase(),
@@ -103,12 +103,12 @@ export class AddContattoComponent implements OnInit {
       numeroTelefono: this.contatto.value.numeroTelefono,
       dataNascita: dataNascitaFormatted
     };
-  
+
     this.cs.addContatto(contatto).subscribe({
       next: (nuovoContatto: Contatto) => {
         if (confirm(`Contatto aggiunto con successo`)) {
           this.router.navigate(['/']);
-          
+
           this.contatto.reset();
         }
       },
@@ -117,12 +117,12 @@ export class AddContattoComponent implements OnInit {
       }
     });
   }
-  
+
   formatDate(dateString: string): string {
     // Formattazione della data da "YYYY-MM-DDTHH:MM:SSZ" a "DD Month YYYY"
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
     return date.toLocaleDateString('it-IT', options);
   }
-  
+
 }

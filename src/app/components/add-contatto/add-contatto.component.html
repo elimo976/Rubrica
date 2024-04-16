@@ -43,7 +43,8 @@
       <p *ngIf="indirizzo.length > 1">Indirizzo consegne</p>
 
       <p-button type="button" label="Aggiungi indirizzo consegna" icon="pi pi-plus" [rounded]="true" severity="info"
-        size="small" [style]="{marginTop: '1em'}" (onClick)="aggiungiIndirizzo()"></p-button>
+        size="small" [style]="{marginTop: '1em'}" (click)="aggiungiIndirizzo()"
+        [disabled]="indirizzo.length>0 && indirizzo.length === 3"></p-button>
 
       <input type="text" pInputText formControlName="indirizzoEmail" placeholder="email" />
       <input type="text" pInputText formControlName="numeroTelefono" placeholder="telefono" />
