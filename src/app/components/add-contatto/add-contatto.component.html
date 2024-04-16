@@ -35,9 +35,11 @@
             <input type="text" pInputText formControlName="provincia" placeholder="provincia" />
             <input type="text" pInputText formControlName="cap" placeholder="cap" />
             <input type="text" pInputText formControlName="nazione" placeholder="nazione" />
+            <hr *ngIf="indirizzo.length > 1">
           </div>
         </div>
       </div>
+
       <p *ngIf="indirizzo.length > 1">Indirizzo consegne</p>
 
       <p-button type="button" label="Aggiungi indirizzo consegna" icon="pi pi-plus" [rounded]="true" severity="info"
