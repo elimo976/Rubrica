@@ -26,8 +26,8 @@
 
     <div class="card flex justify-content-center"
       *ngIf="contatto.get('selezionaTipologia')?.value === 'persona fisica' || contatto.get('selezionaTipologia')?.value === 'persona giuridica'">
-
-      <div formArrayName="indirizzo" id="indirizzo">
+      <p>Indirizzo domicilio:</p>
+      <div formArrayName="indirizzo" class="indirizzo">
         <div *ngFor="let indirizzoGroup of indirizzo.controls; let i = index">
           <div [formGroupName]="i">
             <input type="text" pInputText formControlName="viaECivico" placeholder="via e numero civico" />
@@ -38,6 +38,10 @@
           </div>
         </div>
       </div>
+      <p *ngIf="indirizzo.length > 1">Indirizzo consegne</p>
+
+      <p-button type="button" label="Aggiungi indirizzo consegna" icon="pi pi-plus" [rounded]="true" severity="info"
+        size="small" [style]="{marginTop: '1em'}" (onClick)="aggiungiIndirizzo()"></p-button>
 
       <input type="text" pInputText formControlName="indirizzoEmail" placeholder="email" />
       <input type="text" pInputText formControlName="numeroTelefono" placeholder="telefono" />
