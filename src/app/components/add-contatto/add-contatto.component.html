@@ -1,0 +1,49 @@
+<div id="titolo">
+  <h2>Aggiungi un nuovo contatto</h2>
+  <p-button id="backHome" label="Torna alla Home" [rounded]="true" severity="help" size="small"
+    routerLink="/"></p-button>
+</div>
+<hr>
+<div class="card flex justify-content-center">
+  <form [formGroup]="contatto" (ngSubmit)="addContatto()">
+    <p-dropdown formControlName="selezionaTipologia" [options]="tipologie" [style]="{ minWidth: '14rem' }"
+      placeholder="Scegli tipologia"></p-dropdown>
+    <br>
+
+
+    <div class="card flex justify-content-center"
+      *ngIf="contatto.get('selezionaTipologia')?.value === 'persona fisica'">
+      <input type="text" pInputText formControlName="nome" placeholder="nome" />
+      <input type="text" pInputText formControlName="cognome" placeholder="cognome" />
+      <p-calendar type="text" formControlName="dataNascita" placeholder="data di nascita"
+        class="myCalendar"></p-calendar>
+    </div>
+
+    <div class="card flex justify-content-center"
+      *ngIf="contatto.get('selezionaTipologia')?.value === 'persona giuridica'">
+      <input type="text" pInputText formControlName="ragioneSociale" placeholder="ragione sociale" />
+    </div>
+
+    <div class="card flex justify-content-center"
+      *ngIf="contatto.get('selezionaTipologia')?.value === 'persona fisica' || contatto.get('selezionaTipologia')?.value === 'persona giuridica'">
+
+      <div formArrayName="indirizzo" id="indirizzo">
+        <div *ngFor="let indirizzoGroup of indirizzo.controls; let i = index">
+          <div [formGroupName]="i">
+            <input type="text" pInputText formControlName="viaECivico" placeholder="via e numero civico" />
+            <input type="text" pInputText formControlName="citta" placeholder="città" />
+            <input type="text" pInputText formControlName="provincia" placeholder="provincia" />
+            <input type="text" pInputText formControlName="cap" placeholder="cap" />
+            <input type="text" pInputText formControlName="nazione" placeholder="nazione" />
+          </div>
+        </div>
+      </div>
+
+      <input type="text" pInputText formControlName="indirizzoEmail" placeholder="email" />
+      <input type="text" pInputText formControlName="numeroTelefono" placeholder="telefono" />
+    </div>
+
+    <p-button type="submit" label="Invia" [rounded]="true" severity="info" size="small" [style]="{ marginTop: '1em'}"
+      [disabled]="contatto.invalid"></p-button>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+<div id="titolo">
+    <h2>Scheda contatto</h2>
+    <p-button id="backHome" label="Torna alla Home" [rounded]="true" severity="help" size="small"
+        routerLink="/"></p-button>
+</div>
+<hr>
+<div id="contattoContenitore">
+    <div *ngIf="contatto" class="card flex justify-content-center">
+        <p-card
+            [header]="contatto.tipologia === 'persona fisica' ? contatto.nome + ' ' + contatto.cognome : contatto.ragioneSociale"
+            [subheader]="contatto.numeroTelefono + ' - ' + contatto.indirizzoEmail" [style]="{ width: '360px' }">
+            <div *ngFor="let cont of contatto.indirizzo">
+                <p>{{ cont.viaECivico }},</p>
+                <p>{{ cont.cap }} - {{ cont.citta }} ({{ cont.provincia }}),</p>
+                <p>{{ cont.nazione | uppercase }}</p>
+                <p *ngIf="contatto.tipologia === 'persona fisica' ">Data di nascita: {{contatto.dataNascita}}</p>
+            </div>
+            <ng-template pTemplate="footer">
+                <p-button [rounded]="true" [raised]="true" size="small" label="Modifica" routerLink="/"></p-button>
+                <p-button [rounded]="true" [raised]="true" size="small" label="Elimina" icon="pi pi-times"
+                    styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"
+                    (onClick)="eliminaContatto(contatto.id)"></p-button>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

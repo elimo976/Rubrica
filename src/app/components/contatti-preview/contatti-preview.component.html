@@ -1,0 +1,15 @@
+<h1>Rubrica dei contatti</h1>
+<hr>
+<div class="boxLista" *ngFor="let c of contatti">
+    <a [routerLink]="['/contatti', c.id]" [ngSwitch]="c.tipologia">
+      <ng-container *ngSwitchCase="'persona fisica'">
+        {{c.nome}} {{c.cognome}}
+      </ng-container>
+      <ng-container *ngSwitchCase="'persona giuridica'">
+        {{c.ragioneSociale}}
+      </ng-container>
+    </a>
+  </div>
+  
+  <p-button label="Aggiungi" [rounded]="true" [raised]="true" size="small" routerLink="/add-contatto"></p-button>
+
